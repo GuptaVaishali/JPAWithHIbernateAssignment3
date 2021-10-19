@@ -1,0 +1,86 @@
+use employeedb;
+show tables;
+
+/************** One to Many ********************/
+
+create table author(
+author_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+name varchar(20),
+streetnumber int,
+location varchar(20),
+state varchar(20)
+);
+
+
+create table subject(
+sub_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+subname varchar(20),
+authorid int,
+FOREIGN KEY(authorid) REFERENCES author(author_id)
+);
+
+
+create table book(
+book_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+bookname varchar(20),
+authorid int,
+FOREIGN KEY(authorid) REFERENCES author(author_id)
+);
+
+select * from author;
+select * from subject;
+select * from book;
+
+
+/********** One to One Mapping **********************/
+
+create table authorone(
+author_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+name varchar(20)
+);
+
+create table bookone(
+book_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+bookname varchar(20),
+authorid int,
+Foreign Key(authorid) REFERENCES authorone(author_id)
+);
+
+
+Select * from authorone;
+select * from bookone;
+
+
+/**************** Many to Many Mapping **************/
+
+create table authormany(
+author_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+name varchar(20)
+);
+
+create table bookmany(
+book_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+bookname varchar(20)
+);
+
+create table author_book(
+authorid int,
+bookid int,
+Foreign Key(authorid) REFERENCES authormany(author_id)
+Foreign Key(bookid) REFERENCES bookmany(book_id)
+);
+
+Select * from authormany;
+Select * from bookmany;
+Select * from author_book;
+
+
+
+
+
+
+
+ 
+
+
+
